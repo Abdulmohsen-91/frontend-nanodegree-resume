@@ -2,13 +2,7 @@
 This is empty on purpose! Your code to build the resume will go here.
  */
 
-var formattedName = HTMLheaderName.replace("%data%", "Abdulmohsen Alkhamis");
 
-var role = "OSS Administrator";
-var formattedRole = HTMLheaderRole.replace("%data%", role);
-
-$("#header").prepend(formattedRole);
-$("#header").prepend(formattedName);
 
 
 
@@ -22,9 +16,9 @@ var bio = {
         "twitter": "@abdulmohsen__91",
         "location": "Riyadh"
     },
-    "welcomeMessage": "hi there",
-    "skills": ["aaaaaa","bbbbb","cccccc"],
-    "bioPic": ""
+    "welcomeMessage": "Hi there, I hope you like this resume",
+    "skills": ["Troubleshooting","Time Management"],
+    "bioPic": "../images/fry.jpg"
 };
 
 
@@ -37,14 +31,14 @@ var work = {
             "title": "Technical Support",
             "location": "Riyadh",
             "dates": "2007",
-            "description": "1st"
+            "description": "1st job"
         },
         {
             "employer": "STCS",
             "title": "OSS Administrator",
             "location": "Riyadh",
             "dates": "2016 - 2018",
-            "description": "2nd"
+            "description": "2nd job"
         },
     ] 
 };
@@ -58,16 +52,16 @@ var education = {
             "name": "Flinders University",
             "location": "Adelaide",
             "degree": "Associate degree",
-            "majors": ["aaa","ddd"],
+            "majors": ["Information Technology"],
             "dates": "2007",
             "url": "example"
         },
         {
-            "name": "Flinders University",
-            "location": "Adelaide",
-            "degree": "Associate degree",
-            "majors": ["eee","eee"],
-            "dates": "2013-2015",
+            "name": "Riyadh College of Technology",
+            "location": "Riyadh",
+            "degree": "Associate degree - Diploma",
+            "majors": ["Technical Support"],
+            "dates": "2007-2009",
             "url": "example"
         },
     ],
@@ -77,7 +71,7 @@ var education = {
             "title": "FEND",
             "school": "Udacity",
             "date": "2018",
-            "url": "example"
+            "url": "www.udacity.com"
         },
         {
             "title": "JS",
@@ -95,25 +89,67 @@ var projects = {
     "projects": [
         {
             "title": "Mindset",
-            "dates": "Nov",
-            "description": "example",
-            "images": ["http://via.placeholder.com/350x150","http://via.placeholder.com/350x150"]
+            "dates": "Nov 2017",
+            "description": "A brief about myself and my future goals & letter to myself.",
+            "images": ["http://via.placeholder.com/350x150"]
         },
         {
-            "title": "Animal",
-            "dates": "Dec",
-            "description": "example",
-            "images": ["http://via.placeholder.com/350x150","http://via.placeholder.com/350x150"]
+            "title": "Animal Trading Cards",
+            "dates": "Dec 2017",
+            "description": "Using what I've learned about CSS to convert a design prototype into a functional webpage!",
+            "images": ["http://via.placeholder.com/350x150"]
         },
         {
-            "title": "Portfolio",
-            "dates": "Dec",
-            "description": "example",
-            "images": ["http://via.placeholder.com/350x150","http://via.placeholder.com/350x150"]
+            "title": "Portfolio Site",
+            "dates": "Dec 2017",
+            "description": "Developing a responsive website that will display images, descriptions and links to each of the portfolio projects I have completed throughout the course of my Nanodegree program.",
+            "images": ["http://via.placeholder.com/350x150"]
         }
         
     ] 
 };
+
+
+
+bio.display = function () {
+    
+    var formattedName = HTMLheaderName.replace("%data%", bio.name);
+    var formattedRole = HTMLheaderRole.replace("%data%", bio.role);
+    $("#header").prepend(formattedRole);
+    $("#header").prepend(formattedName);
+    
+    var formattedMobile = HTMLmobile.replace("%data%",bio.contacts.mobile);
+    $("#topContacts").append(formattedMobile);
+    var formattedEmail = HTMLemail.replace("%data%",bio.contacts.email);
+    $("#topContacts").append(formattedEmail);
+    var formattedGithub = HTMLgithub.replace("%data%",bio.contacts.github);
+    $("#topContacts").append(formattedGithub);
+    var formattedTwitter = HTMLtwitter.replace("%data%",bio.contacts.twitter);
+    $("#topContacts").append(formattedTwitter);
+    var formattedlocation = HTMLlocation.replace("%data%",bio.contacts.location);
+    $("#topContacts").append(formattedlocation);
+    
+    var formattedBioPic = HTMLbioPic.replace("%data%",bio.bioPic);
+    $("#header").append(formattedBioPic);
+    var formattedWelcomeMessage = HTMLwelcomeMsg.replace("%data%",bio.welcomeMessage);
+    $("#header").append(formattedWelcomeMessage);
+    
+    if (bio.skills.length > 0) {
+        $("#header").append(HTMLskillsStart);
+        var formattedSkill = "";
+        for ( var i = 0; i < bio.skills.length; i++ ) {
+            formattedSkill = HTMLskills.replace("%data%", bio.skills[i]);
+            $("#skills").append(formattedSkill);
+        }
+    }
+    $("#footerContacts").append(formattedMobile);
+    $("#footerContacts").append(formattedEmail);
+    $("#footerContacts").append(formattedGithub);
+    $("#footerContacts").append(formattedTwitter);
+    $("#footerContacts").append(formattedlocation);
+}
+bio.display();
+
 
 work.display = function () {
     for (var i = 0; i < work.jobs.length; i++) {
@@ -156,7 +192,7 @@ projects.display = function() {
 };
 projects.display();
 
-// the Below 2 for loops need to be fixed, for example, nested for loop
+
 education.display = function() {
     for (var i = 0; i < education.schools.length ; i++) {
         $("#education").append(HTMLschoolStart);
@@ -171,8 +207,9 @@ education.display = function() {
         var formattedMajor = HTMLschoolMajor.replace("%data%",education.schools[i].majors);
         $(".education-entry:last").append(formattedMajor);
     }
+    $(".education-entry:last").append(HTMLonlineClasses);
     for (var x = 0; x < education.onlineCourses.length ; x++) {
-        $("#education").append(HTMLonlineClasses);
+        
         
         var formattedTitle = HTMLonlineTitle.replace("%data%",education.onlineCourses[x].title);
         var formattedSchool = HTMLonlineSchool.replace("%data%",education.onlineCourses[x].school);
@@ -186,17 +223,6 @@ education.display = function() {
 education.display();
 
 
-
-
-if (bio.skills.length > 0) {
-    $("#header").append(HTMLskillsStart);
-    var formattedSkill = "";
-    for ( var i = 0; i < bio.skills.length; i++ ) {
-        formattedSkill = HTMLskills.replace("%data%", bio.skills[i]);
-        $("#skills").append(formattedSkill);
-    }
-}
-
 $(document).click(function(loc) {
     var x = loc.pageX;
     var y = loc.pageY;
@@ -208,7 +234,7 @@ function inName(name) {
     name = name.trim().split(" ");
     console.log(name);
     name[1] = name[1].toUpperCase();
-    name[0] = name[0].slice(0,1).uppercase() + name[0].slice(1).toLowerCase();
+    name[0] = name[0].slice(0,1).toUpperCase() + name[0].slice(1).toLowerCase();
     
     return name[0] +" "+name[1];
 }
