@@ -106,10 +106,12 @@ a {
 
 .orange {
   background-color: #f5ae23;
+    border-radius: 10%;
 }
 
 .orange-text {
   color: #f5ae23;
+    font-weight: bold;
 }
 
 .white-text {
@@ -118,9 +120,10 @@ a {
 }
 
 .gray {
-  background-color: #f3f3f3;
-  padding-bottom: 10px;
-  clear: both;
+    background-color: #f3f3f3;
+    padding-bottom: 10px;
+    clear: both;
+    border-radius: 10%;
 }
 
 .dark-gray {
@@ -173,6 +176,7 @@ span {
 
 #lets-connect {
   text-align: center;
+    
 }
 
 /* Media queries to handle various device widths */
@@ -219,3 +223,4 @@ span {
     display: block;
   }
 }
+
